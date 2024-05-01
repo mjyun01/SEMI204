@@ -59,50 +59,13 @@ int main()
 }
 
 void mirror_transform (unsigned char* in, int const height, int const width, int const channel, unsigned char* out) {
-	int x, y, c;
-
-	for(y=0; y<height; y++)
-		for(x=0; x<width; x++)
-			for(c=0; c<channel; c++)
-				out[y*640*3 + (639-x)*3 + c]=in[y*640*3 + x*3 + c];
+ 
 }
 
 void grayScale_transform (unsigned char* in, int const height, int const width, int const channel, unsigned char* out) {
-	int x, y, c;
-
-	for(y=0; y<height; y++)
-		for(x=0; x<width; x++)
-			for(c=0; c<channel; c++)
-				out[y*640*3 + x*3+c]=(in[y*640*3+x*3+0] + in[y*640*3+x*3+1] + in[y*640*3+x*3+2])/3;
+ 
 }
 
 void sobelFiltering_transform (unsigned char* in, int const height, int const width, int const channel, unsigned char* out) {
-	int x,y,c,i,j;
-	int sumX, sumY;
-	int maskSobelX[3][3]=
-						{{ -1, 0, 1},
-						 { -2, 0, 2},
-						 { -1, 0, 1}};
-	int maskSobelY[3][3]=
-						{{ -1, -2, -1},
-						 {  0,  0,  0},
-						 {  1,  2, 1}};
-
-	unsigned int newValue;
-
-	for(y=1; y<(height-1); y++) {
-		for(x=1; x<(width-1); x++) {
-			sumX = 0;
-			sumY = 0;
-			for(i=0; i<3; i++) {
-				for(j=0; j<3; j++) {
-					sumX += in[(y+i-1)*640*3+(x+j-1)*3+0]*maskSobelX[i][j]; 
-					sumY += in[(y+i-1)*640*3+(x+j-1)*3+0]*maskSobelY[i][j]; 
-				}
-			}
-			newValue = (sumX > 0 ? sumX : -sumX) + (sumY > 0 ? sumY : -sumY);
-			for(c=0; c<channel; c++)
-				out[y*640*3 + x*3+c] = newValue;
-		}
-	}
+ 
 }
